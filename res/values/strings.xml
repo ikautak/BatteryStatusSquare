@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Battery Status Square</string>
+
+    <string name="category_setting_title">Widget setting</string>
+
+    <string name="setting_square_color">Square color</string>
+    <string name="setting_square_color_dialogTitle">Square color</string>
+
+    <string name="setting_text_visible">Display text</string>
+    <string name="setting_text_visible_summary">display battery level in text</string>
+
+    <string name="setting_text_color">Text color</string>
+    <string name="setting_text_color_dialogTitle">Text color</string>
+</resources>

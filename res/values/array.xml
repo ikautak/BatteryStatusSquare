@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_list">
+        <item>Black</item>
+        <item>Dark gray</item>
+        <item>Gray</item>
+        <item>Light gray</item>
+        <item>Blue</item>
+        <item>Cyan</item>
+        <item>Green</item>
+        <item>Magenta</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>White</item>
+    </string-array>
+    <string-array name="color_value">
+        <item>black</item>
+        <item>darkgray</item>
+        <item>gray</item>
+        <item>lightgray</item>
+        <item>blue</item>
+        <item>cyan</item>
+        <item>green</item>
+        <item>magenta</item>
+        <item>red</item>
+        <item>yellow</item>
+        <item>white</item>
+    </string-array>
+</resources>

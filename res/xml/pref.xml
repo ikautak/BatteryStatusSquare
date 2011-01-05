@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/category_setting_title">
+        <ListPreference android:key="square_color"
+            android:title="@string/setting_square_color"
+            android:dialogTitle="@string/setting_square_color_dialogTitle"
+            android:entries="@array/color_list"
+            android:entryValues="@array/color_value"
+            android:defaultValue="black" />
+        <CheckBoxPreference android:key="text_visible"
+            android:title="@string/setting_text_visible"
+            android:summary="@string/setting_text_visible_summary"
+            android:defaultValue="true" />
+        <ListPreference android:key="text_color"
+            android:title="@string/setting_text_color"
+            android:dialogTitle="@string/setting_text_color_dialogTitle"
+            android:entries="@array/color_list"
+            android:entryValues="@array/color_value"
+            android:defaultValue="black" />
+    </PreferenceCategory>
+</PreferenceScreen>
