@@ -132,7 +132,7 @@ public class UpdateService extends Service {
         p.setColor(color);
         p.setAlpha(0x80);
 
-        int level = (int)(mLevel*70/100 + 0.5f);
+        int level = (int)(mLevel*SQUARE_MAX/100 + 0.5f);
         if (DEBUG) Log.v(TAG, "level : " + (SQUARE_MAX - level));
 
         c.drawRect(SQUARE_MIN, SQUARE_MAX - level, SQUARE_MAX, SQUARE_MAX, p);
