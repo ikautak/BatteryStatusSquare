@@ -25,8 +25,8 @@ public class UpdateService extends Service {
     private static final int TEXT_SIZE = 22;
 
     private int mLevel;
+    PendingIntent mPendingIntent;
 
-    private static RemoteViews mRemoteViews;
     private static ComponentName mComponentName;
     private static AppWidgetManager mAppWidgetManager;
 
@@ -66,8 +66,7 @@ public class UpdateService extends Service {
 
         // set preference activity intent.
         Intent clickIntent = new Intent(this, BatteryStatusSquarePreference.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0);
-        mRemoteViews.setOnClickPendingIntent(R.id.widget_base, pendingIntent);
+        mPendingIntent = PendingIntent.getActivity(this, 0, clickIntent, 0);
     }
 
     @Override
@@ -107,6 +106,8 @@ public class UpdateService extends Service {
         // Because create new object everytime.
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.widget);
         remoteViews.setImageViewBitmap(R.id.image, bitmap);
+
+        remoteViews.setOnClickPendingIntent(R.id.widget_base, mPendingIntent);
 
         if (BatteryStatusSquarePreference.isTextVisible(this)) {
             remoteViews.setTextViewText(R.id.text, Integer.toString(mLevel) + "%");
