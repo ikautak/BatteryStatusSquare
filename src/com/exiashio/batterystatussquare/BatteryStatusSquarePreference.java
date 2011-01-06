@@ -57,8 +57,8 @@ public class BatteryStatusSquarePreference extends PreferenceActivity
 
         // need update widget ?
         if (mChanged) {
-            if (DEBUG) Log.v(TAG, "setting changed, update service");
             if (mRunning) {
+                if (DEBUG) Log.v(TAG, "setting changed, update service");
                 Intent intent = new Intent(this, UpdateService.class);
                 startService(intent);
             }

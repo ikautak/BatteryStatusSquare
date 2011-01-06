@@ -20,8 +20,8 @@ public class UpdateService extends Service {
     private static final boolean DEBUG = false;
     private static final String TAG = "UpdateService";
 
-    private static final int SQUARE_MIN = 1;
-    private static final int SQUARE_MAX = 70;
+    private static final int SQUARE_MIN = 0;
+    private static final int SQUARE_MAX = 72;
     private static final int TEXT_SIZE = 22;
 
     private int mLevel;
@@ -29,7 +29,6 @@ public class UpdateService extends Service {
     private static RemoteViews mRemoteViews;
     private static ComponentName mComponentName;
     private static AppWidgetManager mAppWidgetManager;
-    private static Bitmap mBitmap;
 
     BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -57,7 +56,6 @@ public class UpdateService extends Service {
 
         BatteryStatusSquarePreference.mRunning = true;
 
-        mRemoteViews = new RemoteViews(getPackageName(), R.layout.widget);
         mComponentName = new ComponentName(this, WidgetProvider.class);
         mAppWidgetManager = AppWidgetManager.getInstance(this);
 
@@ -100,40 +98,38 @@ public class UpdateService extends Service {
     }
 
     private void updateWidget() {
-        mBitmap = Bitmap.createBitmap(SQUARE_MAX, SQUARE_MAX, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(SQUARE_MAX, SQUARE_MAX, Bitmap.Config.ARGB_8888);
 
-        drawBitmap(mBitmap);
+        drawBitmap(bitmap);
 
-        mRemoteViews.setImageViewBitmap(R.id.image, mBitmap);
+        // RemoteViews has array list of Bitmap. If use static object,
+        // IPC data size is increase, and causes binder error.
+        // Because create new object everytime.
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.widget);
+        remoteViews.setImageViewBitmap(R.id.image, bitmap);
 
         if (BatteryStatusSquarePreference.isTextVisible(this)) {
-            mRemoteViews.setTextViewText(R.id.text, Integer.toString(mLevel) + "%");
-            mRemoteViews.setFloat(R.id.text, "setTextSize", TEXT_SIZE);
-            mRemoteViews.setTextColor(R.id.text,
+            remoteViews.setTextViewText(R.id.text, Integer.toString(mLevel) + "%");
+            remoteViews.setFloat(R.id.text, "setTextSize", TEXT_SIZE);
+            remoteViews.setTextColor(R.id.text,
                     BatteryStatusSquarePreference.getTextColor(this));
-            mRemoteViews.setViewVisibility(R.id.text, View.VISIBLE);
+            remoteViews.setViewVisibility(R.id.text, View.VISIBLE);
         } else {
-            mRemoteViews.setViewVisibility(R.id.text, View.GONE);
+            remoteViews.setViewVisibility(R.id.text, View.GONE);
         }
 
-        mAppWidgetManager.updateAppWidget(mComponentName, mRemoteViews);
+        mAppWidgetManager.updateAppWidget(mComponentName, remoteViews);
     }
 
     private void drawBitmap(Bitmap bitmap) {
-        if (DEBUG) Log.v(TAG, "drawBitmap");
-
         Canvas c = new Canvas(bitmap);
         Paint p = new Paint();
         p.setAntiAlias(true);
-
-        // color setting
-        int color = BatteryStatusSquarePreference.getSquareColor(this);
-        if (DEBUG) Log.v(TAG, "color : " + Integer.toHexString(color));
-        p.setColor(color);
+        p.setColor(BatteryStatusSquarePreference.getSquareColor(this));
         p.setAlpha(0x80);
 
         int level = (int)(mLevel*SQUARE_MAX/100 + 0.5f);
-        if (DEBUG) Log.v(TAG, "level : " + (SQUARE_MAX - level));
+        if (DEBUG) Log.v(TAG, "level : " + mLevel + " square : " + (SQUARE_MAX - level));
 
         c.drawRect(SQUARE_MIN, SQUARE_MAX - level, SQUARE_MAX, SQUARE_MAX, p);
     }

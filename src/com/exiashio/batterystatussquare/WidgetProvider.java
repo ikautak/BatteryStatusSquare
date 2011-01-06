@@ -10,7 +10,7 @@ public class WidgetProvider extends AppWidgetProvider {
     private static final boolean DEBUG = false;
     private static final String TAG = "WidgetProvider";
 
-    private static Intent mIntent;
+    private static Intent mIntent = null;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
