@@ -13,6 +13,13 @@ public abstract class AbstractColorPreference extends DialogPreference
         implements SeekBar.OnSeekBarChangeListener {
     private static final int PROGRESS_MAX = 255;
 
+    // sample view
+    protected static final int SAMPLE_IMAGE_W = 150;
+    protected static final int SAMPLE_IMAGE_H = 40;
+    protected static final int TEXT_SIZE = 22;
+    protected ImageView mSampleImage;
+    protected TextView mSampleText;
+
     // array index
     private static final int RED = 0;
     private static final int GREEN = 1;
@@ -23,12 +30,13 @@ public abstract class AbstractColorPreference extends DialogPreference
     private SeekBar[] mSeekBar = new SeekBar[4];
     private TextView[] mTextView = new TextView[4];
 
-    abstract protected void initSampleView(View view);
+    abstract protected int getCurrentColor();
     abstract protected void updateSampleView(int color);
 
     public AbstractColorPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        setDialogLayoutResource(R.layout.color_preference_dialog);
         setPositiveButtonText(android.R.string.ok);
         setNegativeButtonText(android.R.string.cancel);
     }
@@ -37,7 +45,7 @@ public abstract class AbstractColorPreference extends DialogPreference
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        int current = BatteryStatusSquarePreference.getSquareColor(getContext());
+        int current = getCurrentColor();
 
         initViews(view, current);
 
@@ -118,7 +126,9 @@ public abstract class AbstractColorPreference extends DialogPreference
         mSeekBar[ALPHA].setOnSeekBarChangeListener(this);
 
         // Sample
-        initSampleView(view);
+        mSampleImage = (ImageView)view.findViewById(R.id.sample_color);
+        mSampleText = (TextView)view.findViewById(R.id.sample_text);
+        mSampleText.setTextSize(TEXT_SIZE);
     }
 
     private String getColorValueText(String color, int value) {

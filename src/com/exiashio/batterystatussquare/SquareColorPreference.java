@@ -7,26 +7,21 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SquareColorPreference extends AbstractColorPreference {
-    private static final int SAMPLE_IMAGE_W = 150;
-    private static final int SAMPLE_IMAGE_H = 40;
-
-    private ImageView mSampleImage;
-
     public SquareColorPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        setDialogLayoutResource(R.layout.square_color_preference_dialog);
     }
 
     @Override
-    protected void initSampleView(View view) {
-        mSampleImage = (ImageView)view.findViewById(R.id.sample_color);
+    protected int getCurrentColor() {
+        return BatteryStatusSquarePreference.getSquareColor(getContext());
     }
 
     @Override
     protected void updateSampleView(int color) {
+        // Change image color
         Bitmap bitmap = Bitmap.createBitmap(SAMPLE_IMAGE_W, SAMPLE_IMAGE_H,
                 Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);
@@ -37,5 +32,8 @@ public class SquareColorPreference extends AbstractColorPreference {
         c.drawRect(0, 0, SAMPLE_IMAGE_W, SAMPLE_IMAGE_H, p);
 
         mSampleImage.setImageBitmap(bitmap);
+
+        // Text color is fixed
+        mSampleText.setTextColor(BatteryStatusSquarePreference.getTextColor(getContext()));
     }
 }
