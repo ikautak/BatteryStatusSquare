@@ -5,9 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class TextColorPreference extends AbstractColorPreference {
     public TextColorPreference(Context context, AttributeSet attrs) {
