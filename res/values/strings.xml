@@ -2,14 +2,18 @@
 <resources>
     <string name="app_name">Battery Status Square</string>
 
-    <string name="category_setting_title">Widget setting</string>
+    <string name="pref_color">Color</string>
+    <string name="pref_color_red">Red</string>
+    <string name="pref_color_green">Green</string>
+    <string name="pref_color_blue">Blue</string>
+    <string name="pref_color_alpha">Alpha</string>
 
-    <string name="setting_square_color">Square color</string>
-    <string name="setting_square_color_dialogTitle">Square color</string>
+    <string name="pref_category_square">Square setting</string>
+    <string name="pref_square_color_dialogTitle">Square color</string>
 
-    <string name="setting_text_visible">Display text</string>
-    <string name="setting_text_visible_summary">display battery level in text</string>
-
-    <string name="setting_text_color">Text color</string>
-    <string name="setting_text_color_dialogTitle">Text color</string>
+    <string name="pref_category_text">Text setting</string>
+    <string name="pref_text_visible">Display text</string>
+    <string name="pref_text_visible_summary">display battery level in text</string>
+    <string name="pref_text_color_dialogTitle">Text color</string>
+    <string name="pref_text_sample">sample</string>
 </resources>
