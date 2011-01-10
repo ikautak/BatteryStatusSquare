@@ -73,7 +73,7 @@ public class BatteryStatusSquarePreference extends PreferenceActivity
 
     public static boolean isTextVisible(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).
-                getBoolean(TEXT_VISIBLE, false);
+                getBoolean(TEXT_VISIBLE, true);
     }
 
     public static int getTextColor(Context context) {

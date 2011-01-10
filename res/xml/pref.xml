@@ -5,7 +5,7 @@
             android:key="square_color2"
             android:title="@string/pref_color"
             android:dialogTitle="@string/pref_square_color_dialogTitle"
-            android:defaultValue="0xff000000" />
+            android:defaultValue="0x80000000" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_category_text">
         <CheckBoxPreference android:key="text_visible"
@@ -16,6 +16,6 @@
             android:key="text_color2"
             android:title="@string/pref_color"
             android:dialogTitle="@string/pref_text_color_dialogTitle"
-            android:defaultValue="0xffffffff" />
+            android:defaultValue="0xff000000" />
     </PreferenceCategory>
 </PreferenceScreen>
