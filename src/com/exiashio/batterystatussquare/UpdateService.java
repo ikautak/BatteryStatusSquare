@@ -127,7 +127,6 @@ public class UpdateService extends Service {
         Paint p = new Paint();
         p.setAntiAlias(true);
         p.setColor(BatteryStatusSquarePreference.getSquareColor(this));
-        p.setAlpha(0x80);
 
         int level = (int)(mLevel*SQUARE_MAX/100 + 0.5f);
         if (DEBUG) Log.v(TAG, "level : " + mLevel + " square : " + (SQUARE_MAX - level));
