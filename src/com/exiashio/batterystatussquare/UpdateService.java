@@ -24,6 +24,8 @@ public class UpdateService extends Service {
     private static final int SQUARE_MAX = 72;
     private static final int TEXT_SIZE = 22;
 
+    private static boolean mRunning = false;
+
     private int mLevel;
     PendingIntent mPendingIntent;
 
@@ -54,7 +56,7 @@ public class UpdateService extends Service {
     public void onCreate() {
         if (DEBUG) Log.v(TAG, "onCreate");
 
-        BatteryStatusSquarePreference.mRunning = true;
+        mRunning = true;
 
         mComponentName = new ComponentName(this, WidgetProvider.class);
         mAppWidgetManager = AppWidgetManager.getInstance(this);
@@ -93,7 +95,11 @@ public class UpdateService extends Service {
 
         unregisterReceiver(mBroadcastReceiver);
 
-        BatteryStatusSquarePreference.mRunning = false;
+        mRunning = false;
+    }
+
+    public static boolean isRunning() {
+        return mRunning;
     }
 
     private void updateWidget() {

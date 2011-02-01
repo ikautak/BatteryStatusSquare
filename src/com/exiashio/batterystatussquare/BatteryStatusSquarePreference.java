@@ -22,9 +22,6 @@ public class BatteryStatusSquarePreference extends PreferenceActivity
 
     private boolean mChanged = false;
 
-    // service state
-    static boolean mRunning = false;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (DEBUG) Log.v(TAG, "onCreate");
@@ -46,7 +43,7 @@ public class BatteryStatusSquarePreference extends PreferenceActivity
 
         // need update widget ?
         if (mChanged) {
-            if (mRunning) {
+            if (UpdateService.isRunning()) {
                 if (DEBUG) Log.v(TAG, "setting changed, update service");
                 Intent intent = new Intent(this, UpdateService.class);
                 startService(intent);
